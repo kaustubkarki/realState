@@ -22,7 +22,7 @@ function HomePage() {
             <div className="box">
               <h1>200</h1>
               <h2>Award Gained</h2>
-            </div>
+            </div> 
             <div className="box">
               <h1>2000+</h1>
               <h2>Property Ready</h2>
@@ -37,4 +37,4 @@ function HomePage() {
   );
 }
 
-export default HomePage;
+export default HomePage; 

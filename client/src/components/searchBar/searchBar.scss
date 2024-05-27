@@ -9,7 +9,6 @@
       cursor: pointer;
       background-color: white;
       text-transform: capitalize;
-
       &.active {
         background-color: black;
         color: white;
@@ -38,10 +37,25 @@
       border: none;
     }
 
+    @include md {
+      border: none;
+    }
     input {
       border: none;
       padding: 0px 10px;
       width: 200px;
+      &:valid {
+        background-color: #fece51;
+      }
+      // &:nth-child(1):valid {
+      //   background-color: #317586;
+      // }
+      // &:nth-child(2):valid {
+      //   background-color: #a1bdd0;
+      // }
+      // &:nth-child(3):valid {
+      //   background-color: #78949f;
+      // }
 
       @include lg {
         padding: 0px 5px;
@@ -52,6 +66,8 @@
         }
       }
       @include md {
+        border-radius: 7px;
+
         width: 200px;
         &:nth-child(2),
         &:nth-child(3) {
@@ -73,11 +89,14 @@
     button {
       border: none;
       cursor: pointer;
+
       background-color: #fece51;
       flex: 1;
 
       @include sm {
         padding: 10px;
+        border-radius: 7px;
+        margin-top: 3rem;
       }
 
       img {

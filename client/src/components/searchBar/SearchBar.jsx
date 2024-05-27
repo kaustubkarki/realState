@@ -29,13 +29,19 @@ function SearchBar() {
         ))}
       </div>
       <form>
-        <input type="text" name="location" placeholder="City Location" />
+        <input
+          type="text"
+          name="location"
+          placeholder="City Location"
+          required
+        />
         <input
           type="number"
           name="minPrice"
           min={0}
           max={10000000}
           placeholder="Min Price"
+          required
         />
         <input
           type="number"
@@ -43,8 +49,10 @@ function SearchBar() {
           min={0}
           max={10000000}
           placeholder="Max Price"
+          required
         />
         <button>
+          {/* <span>Search</span> */}
           <img src="/search.png" alt="" />
         </button>
       </form>

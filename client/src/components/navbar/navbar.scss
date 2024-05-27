@@ -8,6 +8,7 @@ nav {
   overflow: hidden;
   a {
     transition: all 0.4s ease;
+    // cursor: pointer;
 
     @include sm {
       display: none;
@@ -61,6 +62,7 @@ nav {
     a {
       padding: 12px 24px;
       margin: 20px;
+      cursor: pointer;
     }
 
     .user {
