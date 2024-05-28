@@ -4,7 +4,7 @@ import HomePage from "./routes/home/HomePage";
 import ListPage from "./routes/listPage/ListPage";
 import Login from "./routes/auth/Login";
 import { SinglePage } from "./routes/singlePage/SinglePage";
-import profilePage from "./routes/profilePage/ProfilePage";
+import ProfilePage from "./routes/profilePage/ProfilePage";
 
 function App() {
   const router = createBrowserRouter([
@@ -25,12 +25,12 @@ function App() {
           element: <Login />,
         },
         {
-          path: "/:id",
-          element: <SinglePage />,
+          path: "/profile",
+          element: <ProfilePage />,
         },
         {
-          path: "/profile",
-          element: <profilePage />,
+          path: "/:id",
+          element: <SinglePage />,
         },
       ],
     },
@@ -39,3 +39,4 @@ function App() {
   return <RouterProvider router={router} />;
 }
 export default App;
+//2:36:44

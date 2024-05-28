@@ -1,11 +1,11 @@
 import { useState } from "react";
 import "./navbar.scss";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function Navbar() {
   const [open, setOpen] = useState(false);
 
-  const user = false;
+  const user = true;
   return (
     <nav>
       <div className="left">
@@ -26,10 +26,10 @@ function Navbar() {
               alt=""
             />
             <span>John Doe</span>
-            {/* <Link to="/profile" className="profile"> */}
+            <Link to="/profile" className="profile">
             <div className="notification">3</div>
             <span>Profile</span>
-            {/* </Link> */}
+            </Link>
           </div>
         ) : (
           <>
