@@ -12,3 +12,13 @@ datasource db {
   provider = "mongodb"
   url      = env("DATABASE_URL")
 }
+
+model User {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  //we are using map because everytime we are creating mongodb attribute the id is alredy created so we are mapping the _id to id for primary key
+  email     String   @unique
+  username  String
+  password  String
+  avatar    String?
+  createdAt DateTime @default(now())
+}
