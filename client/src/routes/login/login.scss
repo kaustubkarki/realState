@@ -1,6 +1,6 @@
 @import "./../../resposive.scss";
 
-.registerPage {
+.login {
   height: 100%;
   display: flex;
 
@@ -11,10 +11,8 @@
     align-items: center;
     font-size: 22px;
     justify-content: left;
-
     @include sm {
       justify-content: center;
-      overflow: hidden;
     }
 
     form {
@@ -28,6 +26,7 @@
         border: 1px solid gray;
         border-radius: 5px;
         font-size: 18px;
+
         @include sm {
           width: 100%;
         }
@@ -53,7 +52,7 @@
       }
 
       a {
-        font-size: 14px;
+        font-size: 22px;
         color: gray;
         border-bottom: 1px solid gray;
         width: max-content;

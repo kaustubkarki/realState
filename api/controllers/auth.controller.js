@@ -57,6 +57,7 @@ export const login = async (req, res) => {
 
     //! CHECK IF THE PASSWORD IS CORRECT
     const isPasswordValid = await bcrypt.compare(password, user.password);
+    //salt is within the hashedpassword
 
     if (!isPasswordValid)
       return res.status(401).json({
@@ -74,16 +75,16 @@ export const login = async (req, res) => {
       },
       process.env.JWT_SECRET_KEY
     );
+
+    const { password: userPassword, ...userInfo } = user;
+    //login rakhna lai password bahek saab pathako. also change name as same name hunu hunna password=>userPassword
     res
       .cookie("token", token, {
-        // httpOnly: true,
+        httpOnly: true,
         maxAge: 1000 * 60,
-        // secure:true, as localhost is only http we cant use this
+        secure: true, // as localhost is only http we cant use this
       })
-      .json({
-        success: true,
-        message: "cookie is set",
-      });
+      .json(userInfo);
     //! GENERATE COOKIE TOKEN AND SEND TO THE USER
   } catch (error) {
     console.log(error);

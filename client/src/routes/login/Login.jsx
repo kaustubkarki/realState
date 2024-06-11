@@ -1,10 +1,9 @@
-import "./register.scss";
-import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import axios from "axios";
+import "./login.scss";
+import { Link, useNavigate } from "react-router-dom";
 import apiRequest from "../../lib/apiRequest";
 
-const Register = () => {
+const Login = () => {
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
@@ -12,45 +11,52 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError("");
     setIsLoading(true);
+    setError("");
     const formData = new FormData(e.target);
-    //! standard way to  pull data from forms
 
     const username = formData.get("username");
-    const email = formData.get("email");
     const password = formData.get("password");
 
     try {
-      const res = await apiRequest.post("/auth/register", {
+      const res = await apiRequest.post("/auth/login", {
         username,
-        email,
         password,
       });
       console.log(res.data);
-      navigate("/login");
+      localStorage.setItem("user", JSON.stringify(res.data));
+
+      navigate("/");
     } catch (error) {
-      setError(error.response.data.message);
+      if (error.response && error.response.data) {
+        setError(error.response.data.message);
+      }
     } finally {
       setIsLoading(false);
     }
   };
   return (
-    <div className="registerPage">
+    <div className="login">
       <div className="formContainer">
         <form onSubmit={handleSubmit}>
-          <h1>Create an Account</h1>
-          <input name="username" type="text" placeholder="Username" required />
-          <input name="email" type="text" placeholder="Email" required />
+          <h1>Welcome back</h1>
+          <input
+            name="username"
+            required
+            minLength={3}
+            maxLength={20}
+            type="text"
+            placeholder="Username"
+          />
           <input
             name="password"
             type="password"
-            placeholder="Password"
             required
+            placeholder="Password"
           />
-          <button disabled={isLoading}>Register</button>
+          <button disabled={isLoading}>Login</button>
           {error && <span>{error}</span>}
-          <Link to="/login">Do you have an account?</Link>
+          <Link to="/register">{"Don't"} you have an account?</Link>
         </form>
       </div>
       <div className="imgContainer">
@@ -60,4 +66,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default Login;
