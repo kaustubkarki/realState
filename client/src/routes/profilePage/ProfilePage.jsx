@@ -9,7 +9,8 @@ const ProfilePage = () => {
   const navigate = useNavigate();
   const handleLogout = async () => {
     try {
-      const res = apiRequest.post("/auth/logout");
+      await apiRequest.post("/auth/logout");
+
       localStorage.removeItem("user");
       navigate("/");
     } catch (error) {
@@ -38,11 +39,11 @@ const ProfilePage = () => {
             <span>
               E-mail: <b>john@gmail.com</b>
             </span>
-            <button>logout</button>
+            <button onClick={handleLogout}>logout</button>
           </div>
           <div className="title">
             <h1>My List</h1>
-            <button onClick={handleLogout}>Create New Post</button>
+            <button>Create New Post</button>
           </div>
           <List />
           <div className="title">
