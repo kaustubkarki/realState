@@ -2,6 +2,8 @@ import express from "express";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import authRoute from "./routes/auth.route.js";
+import testRoute from "./routes/test.route.js"
+import postRoute from "./routes/test.route.js"
 
 const app = express();
 const port = 5000;
@@ -18,6 +20,8 @@ app.use(cookieParser());
 
 // creating api end point
 app.use("/api/v1/auth", authRoute);
+app.use("auth/v1/posts", postRoute);
+app.use("auth/v1/test", testRoute);
 
 app.listen(port, () => {
   console.log(
