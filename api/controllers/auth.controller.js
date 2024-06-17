@@ -2,7 +2,7 @@ import bcrypt, { hashSync } from "bcrypt";
 import jwt from "jsonwebtoken";
 import prisma from "../lib/prisma.js";
 
-import { PrismaClient, Prisma } from "@prisma/client";
+import { Prisma } from "@prisma/client";
 
 export const register = async (req, res) => {
   const { username, email, password } = req.body;
@@ -72,6 +72,7 @@ export const login = async (req, res) => {
     const token = jwt.sign(
       {
         id: user.id,
+        //! isAdmin: true, hardcode database
       },
       process.env.JWT_SECRET_KEY
     );
