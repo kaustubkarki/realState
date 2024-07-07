@@ -28,3 +28,5 @@ app.listen(port, () => {
     `server is running on port: ${port} and client in ` + process.env.CLIENT_URL
   );
 });
+
+//TODO 1:30:17 => REACT CONTECT AUTH

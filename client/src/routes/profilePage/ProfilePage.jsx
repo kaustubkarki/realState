@@ -39,7 +39,7 @@ const ProfilePage = () => {
             <span>
               E-mail: <b>john@gmail.com</b>
             </span>
-            <button onClick={handleLogout}>logout</button>
+            <button onClick={handleLogout}>Log Out</button>
           </div>
           <div className="title">
             <h1>My List</h1>

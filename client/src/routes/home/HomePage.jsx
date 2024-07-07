@@ -1,7 +1,11 @@
+import { useContext } from "react";
 import SearchBar from "../../components/searchBar/SearchBar";
 import "./homePage.scss";
+import { AuthContext } from "../../context/AuthContext";
 
 function HomePage() {
+  const { currentUser } = useContext(AuthContext); //!call multiple context with their name
+  // console.log({ });
   return (
     <div className="homePage">
       <div className="textContainer">
@@ -22,7 +26,7 @@ function HomePage() {
             <div className="box">
               <h1>200</h1>
               <h2>Award Gained</h2>
-            </div> 
+            </div>
             <div className="box">
               <h1>2000+</h1>
               <h2>Property Ready</h2>
@@ -37,4 +41,4 @@ function HomePage() {
   );
 }
 
-export default HomePage; 
+export default HomePage;
