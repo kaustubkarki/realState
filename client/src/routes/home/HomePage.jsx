@@ -5,7 +5,7 @@ import { AuthContext } from "../../context/AuthContext";
 
 function HomePage() {
   const { currentUser } = useContext(AuthContext); //!call multiple context with their name
-  // console.log({ });
+  console.log({ currentUser });
   return (
     <div className="homePage">
       <div className="textContainer">
