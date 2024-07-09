@@ -82,7 +82,7 @@ export const login = async (req, res) => {
     res
       .cookie("token", token, {
         httpOnly: true,
-        maxAge: 1000 * 60,
+        maxAge: 1000 * 60 * 60,
         secure: true, // as localhost is only http we cant use this
       })
       .json(userInfo);

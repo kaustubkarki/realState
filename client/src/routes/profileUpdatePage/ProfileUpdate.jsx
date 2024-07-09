@@ -17,6 +17,7 @@ function ProfileUpdatePage() {
     const formData = new FormData(e.target);
 
     const { username, email, password } = Object.fromEntries(formData);
+    //!FormData.get ma auta auta garera lina parxa so by using Object.fromEntries we can destructure them at once
 
     try {
       const res = await apiRequest.put(`/users/${currentUser.id}`, {

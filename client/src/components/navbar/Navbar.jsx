@@ -32,10 +32,12 @@ function Navbar() {
           </div>
         ) : (
           <>
-            <a href="/login">Sign in</a>
-            <a href="/register" className="register">
-              Sign up
-            </a>
+            <Link to="/login">
+              <a>Sign in</a>
+            </Link>
+            <Link to="/register">
+              <a className="register">Register</a>
+            </Link>
           </>
         )}
         <div className="menuIcon">
