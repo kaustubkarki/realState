@@ -1,33 +1,30 @@
-import { createContext, useEffect, useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 
-// Create a context to manage the script loading state
-const CloudinaryScriptContext = createContext();
-
-function UploadWidget({ uwConfig, setPublicId, setAvatar }) {
+function UploadWidget({ uwConfig, setAvatar }) {
   const [loaded, setLoaded] = useState(false);
 
+  // Load Cloudinary script
   useEffect(() => {
-    // Check if the script is already loaded
-    if (!loaded) {
-      const uwScript = document.getElementById("uw");
-      if (!uwScript) {
-        // If not loaded, create and load the script
+    const loadScript = () => {
+      if (!document.getElementById("uw")) {
         const script = document.createElement("script");
-        script.setAttribute("async", "");
-        script.setAttribute("id", "uw");
         script.src = "https://upload-widget.cloudinary.com/global/all.js";
-        script.addEventListener("load", () => setLoaded(true));
+        script.id = "uw";
+        script.async = true;
+        script.onload = () => setLoaded(true);
         document.body.appendChild(script);
       } else {
-        // If already loaded, update the state
         setLoaded(true);
       }
-    }
-  }, [loaded]);
+    };
 
-  const initializeCloudinaryWidget = () => {
+    loadScript();
+  }, []);
+
+  // Initialize Cloudinary widget
+  const initializeCloudinaryWidget = useCallback(() => {
     if (loaded) {
-      var myWidget = window.cloudinary.createUploadWidget(
+      const myWidget = window.cloudinary.createUploadWidget(
         uwConfig,
         (error, result) => {
           if (!error && result && result.event === "success") {
@@ -36,29 +33,21 @@ function UploadWidget({ uwConfig, setPublicId, setAvatar }) {
           }
         }
       );
-
-      document.getElementById("upload_widget").addEventListener(
-        "click",
-        function () {
-          myWidget.open();
-        },
-        false
-      );
+      myWidget.open();
+    } else {
+      console.error("Cloudinary script not loaded yet");
     }
-  };
+  }, [loaded, uwConfig, setAvatar]);
 
   return (
-    <CloudinaryScriptContext.Provider value={{ loaded }}>
-      <button
-        id="upload_widget"
-        className="cloudinary-button"
-        onClick={initializeCloudinaryWidget}
-      >
-        Upload
-      </button>
-    </CloudinaryScriptContext.Provider>
+    <button
+      id="upload_widget"
+      className="cloudinary-button"
+      onClick={initializeCloudinaryWidget}
+    >
+      Upload
+    </button>
   );
 }
 
 export default UploadWidget;
-export { CloudinaryScriptContext };

@@ -4,11 +4,12 @@ import { AuthContext } from "../../context/AuthContext";
 import apiRequest from "../../lib/apiRequest";
 import { useNavigate } from "react-router-dom";
 import UploadWidget from "./../../components/uploadWidget/UploadWidget";
+import WarningSign from "../../components/warningSign/WarningSign";
 
 function ProfileUpdatePage() {
   const { currentUser, updateUser } = useContext(AuthContext);
   const [error, setError] = useState("");
-  const [avatar, setAvatar] = useState([]);
+  const [avatar, setAvatar] = useState(currentUser.avatar);
 
   const navigate = useNavigate();
 
@@ -17,14 +18,13 @@ function ProfileUpdatePage() {
     const formData = new FormData(e.target);
 
     const { username, email, password } = Object.fromEntries(formData);
-    //!FormData.get ma auta auta garera lina parxa so by using Object.fromEntries we can destructure them at once
 
     try {
       const res = await apiRequest.put(`/users/${currentUser.id}`, {
         username,
         email,
         password,
-        avatar: avatar[0],
+        avatar,
       });
       updateUser(res.data);
       navigate("/profile");
@@ -62,25 +62,22 @@ function ProfileUpdatePage() {
             <input id="password" name="password" type="password" />
           </div>
           <button>Update</button>
-          {error && <span>error</span>}
+          {error && <span>{error}</span>}
         </form>
       </div>
       <div className="sideContainer">
-        <img
-          src={avatar[0] || currentUser.avatar || "/noavatar.png"}
-          alt=""
-          className="avatar"
-        />
+        <img src={avatar || "/noavatar.png"} alt="" className="avatar" />
         <UploadWidget
           uwConfig={{
-            cloudName: "dyp1l9oax",
-            uploadPreset: "realstate",
+            cloudName: "kaustubkarki",
+            uploadPreset: "realState",
             multiple: false,
-            maxImageFileSize: 20000000,
+            maxImageFileSize: 2000000,
             folder: "avatars",
           }}
-          setState={setAvatar}
+          setAvatar={setAvatar}
         />
+        <WarningSign message="The image must be under 2 MB " />
       </div>
     </div>
   );
