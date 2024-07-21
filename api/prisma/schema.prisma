@@ -28,7 +28,7 @@ model Post {
   id         String      @id @default(auto()) @map("_id") @db.ObjectId
   title      String
   price      Int
-  img        String
+  images     String[]
   address    String
   city       String
   bedroom    Int
