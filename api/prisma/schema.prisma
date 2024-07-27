@@ -56,6 +56,7 @@ enum Property {
   land
 }
 
+//! PostDetail Model is created because to store the extra data that is presented on SinglePost Page
 model PostDetail {
   id         String  @id @default(auto()) @map("_id") @db.ObjectId
   desc       String
