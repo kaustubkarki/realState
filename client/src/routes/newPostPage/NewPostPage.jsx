@@ -3,10 +3,14 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { useState } from "react";
 import apiRequest from "./../../lib/apiRequest";
+import UploadWidget from "./../../components/uploadWidget/UploadWidget";
+import { useNavigate } from "react-router-dom";
 
 const NewPostPage = () => {
   const [value, setValue] = useState("");
-  const [error, setError] = useState();
+  const [images, setImages] = useState([]);
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -151,7 +155,22 @@ const NewPostPage = () => {
           </form>
         </div>
       </div>
-      <div className="sideContainer"></div>
+      <div className="sideContainer">
+        <div className="image-container">
+          {images.map((image, index) => (
+            <img src={image} key={index} />
+          ))}
+        </div>
+        <UploadWidget
+          uwConfig={{
+            cloudName: "kaustubkarki",
+            uploadPreset: "realState",
+            multiple: true,
+            folder: "posts",
+          }}
+          setState={setImages}
+        />
+      </div>
     </div>
   );
 };

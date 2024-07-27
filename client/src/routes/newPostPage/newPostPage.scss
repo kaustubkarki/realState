@@ -66,11 +66,50 @@
     align-items: center;
     justify-content: center;
 
-    img {
-      width: 50%;
-      height: 180px;
-      object-fit: cover;
-      border-radius: 5px;
+    // img {
+    //   width: 50%;
+    //   height: 180px;
+    //   object-fit: cover;
+    //   border-radius: 5px;
+    // }
+    .image-container {
+      width: 90%;
+      height: 60%;
+      border: 1px solid #ccc; // Thin border around the container
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-content: flex-start; // Align items to the start
+      overflow-y: auto; // Enable vertical scrolling if needed
+      gap: 10px; // Space between images
+      padding: 10px; // Add padding inside the container
+      position: relative; // Set position for the container
+
+      img {
+        max-width: 50%;
+        max-height: 180px;
+        object-fit: contain; // Ensure images maintain their aspect ratio
+        border-radius: 10px; // Rounded corners for images
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); // Subtle shadow
+        transition: transform 0.3s ease, box-shadow 0.3s ease, z-index 0.3s; // Smooth hover effect
+        position: relative; // Position relative to container for z-index control
+
+        &:hover {
+          transform: scale(2); // Center the image and scale
+          z-index: 10; // Bring the hovered image to the top
+          box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+      }
+
+      /* Ensure the images remain visible even if not hovered */
+      &:hover img {
+        opacity: 0.7; // Slightly dim other images
+      }
+
+      /* The hovered image should have full opacity */
+      img:hover {
+        opacity: 1;
+      }
     }
   }
 }

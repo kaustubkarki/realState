@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 
-function UploadWidget({ uwConfig, setAvatar }) {
+function UploadWidget({ uwConfig, setState }) {
   const [loaded, setLoaded] = useState(false);
 
   // Load Cloudinary script
@@ -29,7 +29,7 @@ function UploadWidget({ uwConfig, setAvatar }) {
         (error, result) => {
           if (!error && result && result.event === "success") {
             console.log("Done! Here is the image info: ", result.info);
-            setAvatar(result.info.secure_url);
+            setState((prev) => [...prev, result.info.secure_url]);
           }
         }
       );
@@ -37,7 +37,7 @@ function UploadWidget({ uwConfig, setAvatar }) {
     } else {
       console.error("Cloudinary script not loaded yet");
     }
-  }, [loaded, uwConfig, setAvatar]);
+  }, [loaded, uwConfig, setState]);
 
   return (
     <button

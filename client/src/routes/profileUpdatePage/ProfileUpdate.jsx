@@ -9,7 +9,7 @@ import WarningSign from "../../components/warningSign/WarningSign";
 function ProfileUpdatePage() {
   const { currentUser, updateUser } = useContext(AuthContext);
   const [error, setError] = useState("");
-  const [avatar, setAvatar] = useState(currentUser.avatar);
+  const [avatar, setAvatar] = useState([]);
 
   const navigate = useNavigate();
 
@@ -24,7 +24,7 @@ function ProfileUpdatePage() {
         username,
         email,
         password,
-        avatar,
+        avatar: avatar[0],
       });
       updateUser(res.data);
       navigate("/profile");
@@ -66,7 +66,11 @@ function ProfileUpdatePage() {
         </form>
       </div>
       <div className="sideContainer">
-        <img src={avatar || "/noavatar.png"} alt="" className="avatar" />
+        <img
+          src={avatar[0] || currentUser.avatar || "/noavatar.png"}
+          alt=""
+          className="avatar"
+        />
         <UploadWidget
           uwConfig={{
             cloudName: "kaustubkarki",
@@ -75,7 +79,7 @@ function ProfileUpdatePage() {
             maxImageFileSize: 2000000,
             folder: "avatars",
           }}
-          setAvatar={setAvatar}
+          setState={setAvatar}
         />
         <WarningSign message="The image must be under 2 MB " />
       </div>
