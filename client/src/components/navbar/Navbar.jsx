@@ -16,6 +16,10 @@ function Navbar() {
           <span>realState</span>
         </a>
         <a href="/">Home</a>
+        <Link to="/list">
+          {" "}
+          <a href="/">List</a>
+        </Link>
         <a href="/">About</a>
         <a href="/">Contact</a>
         <a href="/">Agents</a>

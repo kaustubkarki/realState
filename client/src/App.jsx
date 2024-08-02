@@ -8,6 +8,7 @@ import ProfilePage from "./routes/profilePage/ProfilePage";
 import Register from "./routes/register/register";
 import ProfileUpdatePage from "./routes/profileUpdatePage/ProfileUpdate";
 import NewPostPage from "./routes/newPostPage/NewPostPage";
+import { singlePageLoader } from "./lib/loaders";
 
 function App() {
   const router = createBrowserRouter([
@@ -35,6 +36,7 @@ function App() {
         {
           path: "/:id",
           element: <SinglePage />,
+          loader: singlePageLoader,
         },
       ],
     },
@@ -61,4 +63,3 @@ function App() {
   return <RouterProvider router={router} />;
 }
 export default App;
-//1:48:44
