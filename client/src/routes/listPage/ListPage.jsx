@@ -15,13 +15,13 @@ const ListPage = () => {
       <div className="listContainer">
         <div className="wrapper">
           <Filter />
-          {data.map((item) => (
+          {posts.map((item) => (
             <Card key={item.id} item={item} />
           ))}
         </div>
       </div>
       <div className="mapContainer">
-        <Map items={data} />
+        <Map items={posts} />
         {/* <Map /> */}
       </div>
     </div>
