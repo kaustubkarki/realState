@@ -7,11 +7,13 @@ export const singlePageLoader = async ({ request, params }) => {
 };
 //! since we use the single page to load data by //:id method we can only pass params.id loader, auta use garna arko garnai parxa
 export const listPageLoader = async ({ request, params }) => {
+  console.log(request);
   const query = request.url.split("?")[1];
-  const postPromise = apiRequest("/posts?" + query);
-  return defer({
-    postResponse: postPromise,
-  });
+  const res = apiRequest("/posts?" + query);
+  // return defer({
+  //   postResponse: postPromise,
+  // });
+  return res;
 };
 
 export const profilePageLoader = async () => {
