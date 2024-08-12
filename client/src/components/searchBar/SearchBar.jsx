@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./searchBar.scss";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 const types = ["buy", "rent"];
 
@@ -17,7 +17,6 @@ function SearchBar() {
   };
 
   const handleChange = (e) => {
-    e.preventDefault();
     setQuery((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
@@ -40,7 +39,6 @@ function SearchBar() {
           name="location"
           placeholder="City"
           onChange={handleChange}
-          required
         />
         <input
           type="number"
@@ -49,7 +47,6 @@ function SearchBar() {
           max={10000000}
           placeholder="Min Price"
           onChange={handleChange}
-          required
         />
         <input
           type="number"
@@ -58,10 +55,9 @@ function SearchBar() {
           max={10000000}
           placeholder="Max Price"
           onChange={handleChange}
-          required
         />
         <Link
-          to={`/list?type=${query.type}&${query.city}&${query.city}&minPrice=${query.minPrice}&maxPrice=${query.maxPrice}}`}
+          to={`/list?type=${query.type}&city=${query.location}&minPrice=${query.minPrice}&maxPrice=${query.maxPrice}`}
         >
           <button>
             <img src="/search.png" alt="" />
@@ -73,4 +69,3 @@ function SearchBar() {
 }
 
 export default SearchBar;
-//40min
