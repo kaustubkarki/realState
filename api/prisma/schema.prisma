@@ -14,14 +14,15 @@ datasource db {
 }
 
 model User {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  id         String      @id @default(auto()) @map("_id") @db.ObjectId
   //we are using map because everytime we are creating mongodb attribute the id is alredy created so we are mapping the _id to id for primary key
-  email     String   @unique
-  username  String   @unique
-  password  String
-  avatar    String?
-  createdAt DateTime @default(now())
-  Post      Post[] //!link relation between tables
+  email      String      @unique
+  username   String      @unique
+  password   String
+  avatar     String?
+  createdAt  DateTime    @default(now())
+  Post       Post[] //!link relation between tables
+  savedPosts SavedPost[]
 }
 
 model Post {
@@ -42,6 +43,7 @@ model Post {
   //! Here Post ra User ma many is to one relation lagako ani ref by userId
   userId     String      @db.ObjectId
   postDetail PostDetail?
+  savedPosts SavedPost[]
 }
 
 enum Type {
@@ -69,4 +71,16 @@ model PostDetail {
   restaurant Int?
   post       Post    @relation(fields: [postId], references: [id])
   postId     String  @unique @db.ObjectId
+}
+
+model SavedPost {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  user      User     @relation(fields: [userId], references: [id])
+  post      Post     @relation(fields: [postId], references: [id])
+  userId    String   @unique @db.ObjectId
+  postId    String   @unique @db.ObjectId
+  createdAt DateTime @default(now())
+
+  //! since same userID ra postID bannu vayena so unique hun aparyo
+  @@unique([userId, postId])
 }
