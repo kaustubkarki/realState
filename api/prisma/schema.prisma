@@ -13,18 +13,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id         String      @id @default(auto()) @map("_id") @db.ObjectId
-  //we are using map because everytime we are creating mongodb attribute the id is alredy created so we are mapping the _id to id for primary key
-  email      String      @unique
-  username   String      @unique
-  password   String
-  avatar     String?
-  createdAt  DateTime    @default(now())
-  Post       Post[] //!link relation between tables
-  savedPosts SavedPost[]
-}
-
 model Post {
   id         String      @id @default(auto()) @map("_id") @db.ObjectId
   title      String
@@ -83,4 +71,39 @@ model SavedPost {
 
   //! since same userID ra postID bannu vayena so unique hun aparyo
   @@unique([userId, postId])
+}
+
+model User {
+  id         String      @id @default(auto()) @map("_id") @db.ObjectId
+  //we are using map because everytime we are creating mongodb attribute the id is alredy created so we are mapping the _id to id for primary key
+  email      String      @unique
+  username   String      @unique
+  password   String
+  avatar     String?
+  createdAt  DateTime    @default(now())
+  Post       Post[] //!link relation between tables
+  savedPosts SavedPost[]
+  chats      Chat[]      @relation(fields: [chatIDs], references: [id])
+  chatIDs    String[]    @db.ObjectId
+}
+
+model Chat {
+  id          String    @id @default(auto()) @map("_id") @db.ObjectId
+  //! Prisma bata mongodb ma kaam garda sidai many-to-many relation rakhna mildaina so we have to create cross-section relationShips
+  //todo check https://pris.ly/d/document-database-many-to-many
+  users       User[]    @relation(fields: [userIDs], references: [id])
+  userIDs     String[]  @db.ObjectId
+  createdAt   DateTime  @default(now())
+  seenBy      String[]  @db.ObjectId
+  messages    Message[]
+  lastMessage String?
+}
+
+model Message {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  text      String
+  userId    String
+  chat      Chat     @relation(fields: [chatId], references: [id])
+  chatId    String   @db.ObjectId
+  createdAt DateTime @default(now())
 }
