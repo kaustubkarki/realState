@@ -18,7 +18,8 @@
     "react-leaflet": "^4.2.1",
     "react-quill": "^2.0.0",
     "react-router-dom": "^6.23.1",
-    "sass": "^1.77.2"
+    "sass": "^1.77.2",
+    "timeago.js": "^4.0.2"
   },
   "devDependencies": {
     "@types/react": "^18.2.56",

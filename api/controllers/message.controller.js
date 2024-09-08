@@ -11,7 +11,7 @@ export const addMessage = async (req, res) => {
       where: {
         id: chatId,
         userIDs: {
-          has: tokenUserId, // Use `has` to check if the user is part of the chat
+          hasSome: [tokenUserId], // Use `has` to check if the user is part of the chat
         },
       },
     });
@@ -36,14 +36,11 @@ export const addMessage = async (req, res) => {
         id: chatId,
       },
       data: {
-        seenBy: {
-          push: tokenUserId, // Append the userId to the seenBy array
-        },
-        lastMessage: text, // Update the last message text
+        seenBy: [tokenUserId],
+        lastMessage: text,
       },
     });
 
-    // Respond with the newly created message
     res.status(200).json(message);
   } catch (err) {
     console.error("Error adding message:", err); // Add more detailed error logging
