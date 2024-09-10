@@ -7,6 +7,7 @@ import {
   savePost,
   updateUser,
   profilePosts,
+  getNotificationNumber,
 } from "../controllers/user.controller.js";
 
 const router = express.Router();
@@ -17,5 +18,6 @@ router.put("/:id", verify, updateUser);
 router.delete("/:id", deleteUser);
 router.post("/save", verify, savePost);
 router.get("/profilePosts", verify, profilePosts);
+router.get("/notification", verify, getNotificationNumber);
 
 export default router;

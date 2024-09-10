@@ -28,7 +28,6 @@ io.on("connection", (socket) => {
   });
 
   socket.on("sendMessage", ({ receiverId, data }) => {
-    // console.log(data);
     const receiver = getUser(receiverId);
     io.to(receiver.socketId).emit("getMessage", data);
   });
@@ -38,4 +37,4 @@ io.on("connection", (socket) => {
   });
 });
 
-io.listen("4000");
+io.listen("3333");
